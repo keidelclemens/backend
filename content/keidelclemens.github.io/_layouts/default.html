@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>    
+    <title>
+      {{page.title}}
+    </title>
+    <link rel="stylesheet" type="text/css" href="/resources/style.css">
+    {% if page.redirect %}
+      <meta http-equiv="refresh" content="2; URL={{ page.redirect }}">
+    {% endif %}
+</head>
+  <body><a href="/">
+    <header>
+        <h1>Clemens Family Website</h1>
+</header>
+</a>
+<div id="content">
+    {{ content }}
+    {% if page.comments %}
+      
+{% include comments.html %}                            
+    
+{% endif %}
+</div>
+    
+  </body>
+</html>

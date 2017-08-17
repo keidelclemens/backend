@@ -1,0 +1,16 @@
+---
+layout: default
+---
+
+<h2>{{page.title}}</h2>
+
+{{page.content}}
+
+{% assign sorted = (site.chapters | sort: 'order') %}
+<ul>
+{% for chapter in sorted %}
+  {% if chapter.book == page.slug %}
+  <li> <a href="{{chapter.url}}">{{chapter.title }}</a> </li>
+  {% endif %}
+{% endfor %}
+</ul>

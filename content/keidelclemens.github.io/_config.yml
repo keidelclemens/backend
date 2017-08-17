@@ -1,0 +1,17 @@
+title: Clemens Records
+permalink: pretty
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+      comments: true
+
+collections:
+ books:
+  output: true
+  permalink: /:slug
+ chapters:
+  output: true

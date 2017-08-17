@@ -1,0 +1,36 @@
+---
+title: Home
+comments: false
+---
+
+{% assign sorted = (site.books | sort: 'order') %}
+<table width="100%">
+  <tr align="center" style="vertical-align:top">
+    <td width="50%">
+      <h3>Ruth</h3>
+      {% for book in sorted %}
+        {% if book.owner == 'ruth' %}
+          <a href="{{book.url}}">{{book.title}}</a><br>
+        {% endif %}
+      {% endfor %}
+    </td>
+    <td width="50%">
+      <h3>Jonathan</h3>
+      {% for book in sorted %}
+        {% if book.owner == 'jonathan' %}
+          <a href="{{book.url}}">{{book.title}}</a><br>
+        {% endif %}
+      {% endfor %}
+    </td>
+  </tr>
+  <tr align="center" style="vertical-align:top">
+    <td colspan="2" width="100%">
+      <h3>Family</h3>
+      {% for book in sorted %}
+        {% if book.owner == 'family' %}
+          <a href="{{book.url}}">{{book.title}}</a><br>
+        {% endif %}
+      {% endfor %}
+    </td>
+  </tr>
+</table>

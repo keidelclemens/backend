@@ -1,0 +1,19 @@
+---
+layout: default
+---
+
+{% for book in site.books %}
+  {% if page.book == book.slug %}
+    {% assign back_link = book.url %}
+    {% assign back_book_title = book.title %}
+  {% endif %}
+{% endfor %}
+
+<h2>{{page.title}}</h2>
+
+{% if back_link %}
+  <h3><a href="{{back_link}}">back to {{back_book_title}}</a></h3><br><br>
+{% endif %}
+
+{{page.content}}
+<br><br>
