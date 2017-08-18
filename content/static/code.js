@@ -131,7 +131,10 @@ function changevalue(el) {
     }
 }
 
-function change_txt_value(el_id, new_value) {
+function change_txt_value(el_id) {
+  console.log(el_id);
+  var new_value = CKEDITOR.instances[el_id].getData();
+  console.log(new_value);
   switch(el_id) {
     case 'book_description':
       data[selected_owner()][selected_book_index()].content = new_value;

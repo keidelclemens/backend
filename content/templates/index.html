@@ -12,6 +12,8 @@
 <script src={% static "code.js" %}>
 </script>
 	<script src="https://cdn.ckeditor.com/4.6.1/standard-all/ckeditor.js"></script>
+<script src={% static "plugin.js" %}>
+</script>
   </head>
 
   <body>
@@ -76,7 +78,6 @@
   <label class="col-md-4 control-label" for="book_description">Book description</label>
   <div class="col-md-4">                     
     <textarea class="form-control" id="book_description" name="book_description"></textarea>
-    <input type="button" onclick="change_txt_value('book_description', CKEDITOR.instances.book_description.getData());" value="save" />
   </div>
 </div>
 
@@ -131,7 +132,6 @@
   <label class="col-md-4 control-label" for="chapter_contents">Chapter content</label>
   <div class="col-md-4">                     
     <textarea onkeyup="changevalue(this)" class="form-control" id="chapter_contents" name="chapter_contents"></textarea>
-    <input type="button" onclick="change_txt_value('chapter_contents', CKEDITOR.instances.chapter_contents.getData());" value="save" />
   </div>
 </div>
 
@@ -139,7 +139,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-4">
-    <button id="submit" name="submit" class="btn btn-primary">Submit</button>
+    <input type="button" id="submit" name="submit" class="btn btn-primary" value="Submit"/>
   </div>
 </div>
 
@@ -247,7 +247,11 @@
 			{ name: '720p', type: 'widget', widget: 'embedSemantic', attributes: { 'class': 'embed-720p' } },
 			{ name: '1080p', type: 'widget', widget: 'embedSemantic', attributes: { 'class': 'embed-1080p' } }
 		]
-	} ); })
+	} ); 
+});
+['book_description', 'chapter_contents'].forEach(function(item, index) {
+CKEDITOR.instances[item].on('change', function() {change_txt_value(item)});
+});
 </script>
 
   </body>
