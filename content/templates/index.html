@@ -1,13 +1,255 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <title>title</title>
-   
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src={% static "code.js" %}>
+</script>
+	<script src="https://cdn.ckeditor.com/4.6.1/standard-all/ckeditor.js"></script>
   </head>
 
   <body>
-    this is a test
+<form class="form-horizontal" style="width:5000px">
+<fieldset>
+
+<!-- Form Name -->
+<legend>keidelclemens backend</legend>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="owner">Owner</label>
+  <div class="col-md-4">
+    <select onchange="changevalue(this)" id="owner" name="owner" class="form-control">
+      <option value="ruth">Ruth</option>
+      <option value="jonathan">Jonathan</option>
+      <option value="family">Family</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Multiple -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="book">Book</label>
+  <div class="col-md-4">
+    <select onchange="changevalue(this)" id="book" name="book" class="form-control" multiple="multiple">
+    </select>
+    <input type="button" value="move up" onclick="moveUp('book')" />
+    <input type="button" value="move down" onclick="moveDown('book')" />
+  </div>
+</div>
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="add_book"></label>
+  <div class="col-md-8">
+    <input type="button" id="add_book" name="add_book" class="btn btn-success" onclick="add_a_book()" value="Add book" />
+    <input type="button" id="delete_book" name="delete_book" class="btn btn-danger" onclick="delete_a_book()" value="Delete book" />
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="book_title">Book title</label>  
+  <div class="col-md-4">
+  <input onkeyup="changevalue(this)" id="book_title" name="book_title" placeholder="" class="form-control input-md" type="text">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="book_url">Book URL token</label>  
+  <div class="col-md-4">
+  <input onkeyup="changevalue(this)" id="book_url" name="book_url" placeholder="" class="form-control input-md" type="text">
+  <span class="help-block">This is what will appear at the end of the URL for this book.  It should be unique and have only lowercase letters, numbers, and underscore</span>  
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="book_description">Book description</label>
+  <div class="col-md-4">                     
+    <textarea class="form-control" id="book_description" name="book_description"></textarea>
+    <input type="button" onclick="change_txt_value('book_description', CKEDITOR.instances.book_description.getData());" value="save" />
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="redirect_url">Redirect URL</label>  
+  <div class="col-md-4">
+  <input onkeyup="changevalue(this)" id="redirect_url" name="redirect_url" placeholder="" class="form-control input-md" type="text">
+  <span class="help-block">If this has a value, the site will redirect to this url, and all settings after this one are ignored.</span>  
+  </div>
+</div>
+
+<!-- Select Multiple -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="chapters">Chapters</label>
+  <div class="col-md-4">
+    <select onchange="changevalue(this)" id="chapters" name="chapters" class="form-control" multiple="multiple">
+    </select>
+    <input type="button" value="move up" onclick="moveUp('chapters')" />
+    <input type="button" value="move down" onclick="moveDown('chapters')" />
+  </div>
+</div>
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="add_chapter"></label>
+  <div class="col-md-8">
+    <input type="button" id="add_chapter" name="add_chapter" class="btn btn-success" onclick="add_a_chapter()" value="Add chapter" />
+    <input type="button" id="delete_chapter" name="delete_chapter" class="btn btn-danger" onclick="delete_a_chapter()" value="Delete chapter" />
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="chapter_title">Chapter title</label>  
+  <div class="col-md-4">
+  <input onkeyup="changevalue(this)" id="chapter_title" name="chapter_title" placeholder="" class="form-control input-md" type="text" value="">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="chapter_url">Chapter URL token</label>  
+  <div class="col-md-4">
+  <input onkeyup="changevalue(this)" id="chapter_url" name="chapter_url" placeholder="" class="form-control input-md" type="text">
+  <span class="help-block">This is what will appear at the end of the URL for this chapter.  It should be unique and have only lowercase letters, numbers, and underscore</span>  
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="chapter_contents">Chapter content</label>
+  <div class="col-md-4">                     
+    <textarea onkeyup="changevalue(this)" class="form-control" id="chapter_contents" name="chapter_contents"></textarea>
+    <input type="button" onclick="change_txt_value('chapter_contents', CKEDITOR.instances.chapter_contents.getData());" value="save" />
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="submit"></label>
+  <div class="col-md-4">
+    <button id="submit" name="submit" class="btn btn-primary">Submit</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+<script>['book_description', 'chapter_contents'].forEach(function(item, index) {
+	CKEDITOR.replace( item, {
+		// Define the toolbar: http://docs.ckeditor.com/#!/guide/dev_toolbar
+		// The standard preset from CDN which we used as a base provides more features than we need.
+		// Also by default it comes with a 2-line toolbar. Here we put all buttons in a single row.
+		toolbar: [
+			{ name: 'clipboard', items: [ 'Undo', 'Redo' ] },
+			{ name: 'styles', items: [ 'Styles', 'Format' ] },
+			{ name: 'basicstyles', items: [ 'Bold', 'Italic', 'Strike', '-', 'RemoveFormat' ] },
+			{ name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
+			{ name: 'links', items: [ 'Link', 'Unlink' ] },
+			{ name: 'insert', items: [ 'Image', 'EmbedSemantic', 'Table' ] },
+			{ name: 'tools', items: [ 'Maximize' ] },
+			{ name: 'editing', items: [ 'Scayt' ] }
+		],
+
+		// Since we define all configuration options here, let's instruct CKEditor to not load config.js which it does by default.
+		// One HTTP request less will result in a faster startup time.
+		// For more information check http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-customConfig
+		customConfig: '',
+
+		// Enabling extra plugins, available in the standard-all preset: http://ckeditor.com/presets-all
+		extraPlugins: 'autoembed,embedsemantic,image2,uploadimage,uploadfile',
+
+		/*********************** File management support ***********************/
+		// In order to turn on support for file uploads, CKEditor has to be configured to use some server side
+		// solution with file upload/management capabilities, like for example CKFinder.
+		// For more information see http://docs.ckeditor.com/#!/guide/dev_ckfinder_integration
+
+		// Uncomment and correct these lines after you setup your local CKFinder instance.
+		// filebrowserBrowseUrl: 'http://example.com/ckfinder/ckfinder.html',
+		// filebrowserUploadUrl: 'http://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+		/*********************** File management support ***********************/
+
+		// Remove the default image plugin because image2, which offers captions for images, was enabled above.
+		removePlugins: 'image',
+
+		// Make the editing area bigger than default.
+		height: 461,
+
+		// An array of stylesheets to style the WYSIWYG area.
+		// Note: it is recommended to keep your own styles in a separate file in order to make future updates painless.
+		contentsCss: [ 'https://cdn.ckeditor.com/4.6.1/standard-all/contents.css', '{% static "mystyles.css" %}' ],
+
+		// This is optional, but will let us define multiple different styles for multiple editors using the same CSS file.
+		bodyClass: 'article-editor',
+
+		// Reduce the list of block elements listed in the Format dropdown to the most commonly used.
+		format_tags: 'p;h1;h2;h3;pre',
+
+		// Simplify the Image and Link dialog windows. The "Advanced" tab is not needed in most cases.
+		removeDialogTabs: 'image:advanced;link:advanced',
+
+		// Define the list of styles which should be available in the Styles dropdown list.
+		// If the "class" attribute is used to style an element, make sure to define the style for the class in "mystyles.css"
+		// (and on your website so that it rendered in the same way).
+		// Note: by default CKEditor looks for styles.js file. Defining stylesSet inline (as below) stops CKEditor from loading
+		// that file, which means one HTTP request less (and a faster startup).
+		// For more information see http://docs.ckeditor.com/#!/guide/dev_styles
+		stylesSet: [
+			/* Inline Styles */
+			{ name: 'Marker',			element: 'span', attributes: { 'class': 'marker' } },
+			{ name: 'Cited Work',		element: 'cite' },
+			{ name: 'Inline Quotation',	element: 'q' },
+
+			/* Object Styles */
+			{
+				name: 'Special Container',
+				element: 'div',
+				styles: {
+					padding: '5px 10px',
+					background: '#eee',
+					border: '1px solid #ccc'
+				}
+			},
+			{
+				name: 'Compact table',
+				element: 'table',
+				attributes: {
+					cellpadding: '5',
+					cellspacing: '0',
+					border: '1',
+					bordercolor: '#ccc'
+				},
+				styles: {
+					'border-collapse': 'collapse'
+				}
+			},
+			{ name: 'Borderless Table',		element: 'table',	styles: { 'border-style': 'hidden', 'background-color': '#E6E6FA' } },
+			{ name: 'Square Bulleted List',	element: 'ul',		styles: { 'list-style-type': 'square' } },
+
+			/* Widget Styles */
+			// We use this one to style the brownie picture.
+			{ name: 'Illustration', type: 'widget', widget: 'image', attributes: { 'class': 'image-illustration' } },
+			// Media embed
+			{ name: '240p', type: 'widget', widget: 'embedSemantic', attributes: { 'class': 'embed-240p' } },
+			{ name: '360p', type: 'widget', widget: 'embedSemantic', attributes: { 'class': 'embed-360p' } },
+			{ name: '480p', type: 'widget', widget: 'embedSemantic', attributes: { 'class': 'embed-480p' } },
+			{ name: '720p', type: 'widget', widget: 'embedSemantic', attributes: { 'class': 'embed-720p' } },
+			{ name: '1080p', type: 'widget', widget: 'embedSemantic', attributes: { 'class': 'embed-1080p' } }
+		]
+	} ); })
+</script>
+
   </body>
 </html>
 
