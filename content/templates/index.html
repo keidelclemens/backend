@@ -9,6 +9,7 @@
   crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script>window.csrf_token = "{{ csrf_token }}";</script>
 <script src={% static "code.js" %}>
 </script>
 	<script src="https://cdn.ckeditor.com/4.6.1/standard-all/ckeditor.js"></script>
@@ -127,6 +128,15 @@
   </div>
 </div>
 
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="chapter_url">Heading</label>  
+  <div class="col-md-4">
+  <input onkeyup="changevalue(this)" id="chapter_heading" name="chapter_heading" placeholder="" class="form-control input-md" type="text">
+  <span class="help-block">If this has a value, it will appear above this chapter in the book contents as a section heading</span>  
+  </div>
+</div>
+
 <!-- Textarea -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="chapter_contents">Chapter content</label>
@@ -139,7 +149,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-4">
-    <input type="button" id="submit" name="submit" class="btn btn-primary" value="Submit"/>
+    <input onclick="save_data()" type="button" id="submit" name="submit" class="btn btn-primary" value="Submit"/>
   </div>
 </div>
 
@@ -197,7 +207,7 @@
 		format_tags: 'p;h1;h2;h3;pre',
 
 		// Simplify the Image and Link dialog windows. The "Advanced" tab is not needed in most cases.
-		removeDialogTabs: 'image:advanced;link:advanced',
+		//removeDialogTabs: 'image:advanced;link:advanced',
 
 		// Define the list of styles which should be available in the Styles dropdown list.
 		// If the "class" attribute is used to style an element, make sure to define the style for the class in "mystyles.css"

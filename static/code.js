@@ -44,9 +44,6 @@ function changevalue(el) {
         case 'chapter_url':
             data[selected_owner()][selected_book_index()].chapters[selected_chapter_index()].url = x;
             break;
-        case 'chapter_heading':
-            data[selected_owner()][selected_book_index()].chapters[selected_chapter_index()].heading = x;
-            break;
         case 'chapter_contents':
             data[selected_owner()][selected_book_index()].chapters[selected_chapter_index()].content = x;
             break;
@@ -84,7 +81,6 @@ function load_owner(owner) {
     $("#chapters").val("");
     $("#chapter_title").val("");
     $("#chapter_url").val("");
-    $("#chapter_heading").val("");
     CKEDITOR.instances.chapter_contents.setData("");
     load_book(0);
 }
@@ -108,14 +104,12 @@ function load_book(book) {
     $("#chapters").val("");
     $("#chapter_title").val("");
     $("#chapter_url").val("");
-    $("#chapter_heading").val("");
     CKEDITOR.instances.chapter_contents.setData("");
 }
 
 function load_chapter(chapter) {
     $("#chapter_title").val(data[selected_owner()][selected_book_index()].chapters[selected_chapter_index()].title);
     $("#chapter_url").val(data[selected_owner()][selected_book_index()].chapters[selected_chapter_index()].url);
-    $("#chapter_heading").val(data[selected_owner()][selected_book_index()].chapters[selected_chapter_index()].heading);
     CKEDITOR.instances.chapter_contents.setData(data[selected_owner()][selected_book_index()].chapters[selected_chapter_index()].content);
 }
 
@@ -218,7 +212,8 @@ $(document).ready(function() {
 });
 
 function save_data() {
-  $("#submit").prop('disabled', true);
+  document.getElementById("submit").disabled = true; 
+  console.log('test');
     $.ajax({
        url: '/save/',
        type: "POST",
@@ -228,19 +223,16 @@ function save_data() {
        },
        statusCode: {
          200: function (your_Response_Data) {
-            alert('Your changes are being uploaded.');
-  $("#submit").prop('disabled', false);
+            alert('Your changes are being uploaded.  They should appear on the site in a few minutes.');
+            document.getElementById("submit").disabled = false; 
           },
           // ... handle errors if required
           404: function () {
-            alert('There was an error.')
-             // what to do on 404 etc.
-  $("#submit").prop('disabled', false);
+             alert('There was an error.');
           }
        },
        complete: function (jqXHR, textStatus) {
           // Things to do after everything is completed
-  $("#submit").prop('disabled', false);
        }
     });
 };
@@ -258,5 +250,5 @@ function retrieve_data() {
         $("#owner").val("ruth");
         load_owner('ruth');
     }}
-  });
+});
 }
